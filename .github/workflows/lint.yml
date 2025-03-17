@@ -25,7 +25,7 @@ jobs:
         run: deno lint .
 
   format:
-    name: Check linting
+    name: Check format
     runs-on: ubuntu-latest
     steps:
       - name: Clone repository
