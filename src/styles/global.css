@@ -1,17 +1,18 @@
 @import "tailwindcss";
 
 @font-face {
-  font-family: 'JetBrains Mono';
-  src: url('fonts/JetBrainsMono-Light.woff2') format('woff2'),
-  url('fonts/JetBrainsMono-Regular.woff2') format('woff2'),
-  url('fonts/JetBrainsMono-Thin.woff2') format('woff2');
+  font-family: "JetBrains Mono";
+  src:
+    url("fonts/JetBrainsMono-Light.woff2") format("woff2"),
+    url("fonts/JetBrainsMono-Regular.woff2") format("woff2"),
+    url("fonts/JetBrainsMono-Thin.woff2") format("woff2");
   font-weight: normal;
   font-style: normal;
 }
 
 body {
   @apply bg-[#060513] text-white;
-  font-family: 'JetBrains Mono', sans-serif;
+  font-family: "JetBrains Mono", sans-serif;
 }
 
 .custom-cursor {
@@ -23,4 +24,143 @@ body {
     rgba(255, 255, 255, 0),
     rgba(255, 255, 255, 0)
   );
+}
+
+@keyframes topBubbles {
+  0% {
+    background-position:
+      5% 90%,
+      10% 90%,
+      10% 90%,
+      15% 90%,
+      25% 90%,
+      25% 90%,
+      40% 90%,
+      55% 90%,
+      70% 90%;
+  }
+
+  50% {
+    background-position:
+      0% 80%,
+      0% 20%,
+      10% 40%,
+      20% 0%,
+      30% 30%,
+      22% 50%,
+      50% 50%,
+      65% 20%,
+      90% 30%;
+  }
+
+  100% {
+    background-position:
+      0% 70%,
+      0% 10%,
+      10% 30%,
+      20% -10%,
+      30% 20%,
+      22% 40%,
+      50% 40%,
+      65% 10%,
+      90% 20%;
+    background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+  }
+}
+
+@keyframes bottomBubbles {
+  0% {
+    background-position:
+      10% -10%,
+      30% 10%,
+      55% -10%,
+      70% -10%,
+      85% -10%,
+      70% -10%,
+      70% 0%;
+  }
+
+  50% {
+    background-position:
+      0% 80%,
+      20% 80%,
+      45% 60%,
+      60% 100%,
+      75% 70%,
+      95% 60%,
+      105% 0%;
+  }
+
+  100% {
+    background-position:
+      0% 90%,
+      20% 90%,
+      45% 70%,
+      60% 110%,
+      75% 80%,
+      95% 70%,
+      110% 10%;
+    background-size: 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%, 0% 0%;
+  }
+}
+
+.sparkling-btn {
+  @apply relative inline-block px-6 py-3 rounded-lg border-none text-white
+    cursor-pointer bg-[#4ca4ca] transition-all duration-[0.2s];
+  transition-timing-function: ease;
+  &:active {
+    transform: scale(0.95);
+  }
+  &::before, &::after {
+    @apply absolute content-[""] w-[150%] left-[50%] h-full translate-x-[-50%]
+      z-[-1000] bg-no-repeat;
+  }
+  &:hover {
+    &::before {
+      top: -70%;
+      background-image:
+        radial-gradient(circle, #4ca4ca 20%, transparent 20%),
+        radial-gradient(circle, transparent 20%, #4ca4ca 20%, transparent 30%),
+        radial-gradient(circle, #4ca4ca 20%, transparent 20%),
+        radial-gradient(circle, #4ca4ca 20%, transparent 20%),
+        radial-gradient(circle, transparent 10%, #4ca4ca 15%, transparent 20%),
+        radial-gradient(circle, #4ca4ca 20%, transparent 20%),
+        radial-gradient(circle, #4ca4ca 20%, transparent 20%),
+        radial-gradient(circle, #4ca4ca 20%, transparent 20%),
+        radial-gradient(circle, #4ca4ca 20%, transparent 20%);
+      background-size:
+        10% 10%,
+        20% 20%,
+        15% 15%,
+        20% 20%,
+        18% 18%,
+        10% 10%,
+        15% 15%,
+        10% 10%,
+        18% 18%;
+      background-position: 50% 120%;
+      animation: topBubbles 0.6s ease;
+    }
+    &::after {
+      bottom: -70%;
+      background-image:
+        radial-gradient(circle, #4ca4ca 20%, transparent 20%),
+        radial-gradient(circle, #4ca4ca 20%, transparent 20%),
+        radial-gradient(circle, transparent 10%, #4ca4ca 15%, transparent 20%),
+        radial-gradient(circle, #4ca4ca 20%, transparent 20%),
+        radial-gradient(circle, #4ca4ca 20%, transparent 20%),
+        radial-gradient(circle, #4ca4ca 20%, transparent 20%),
+        radial-gradient(circle, #4ca4ca 20%, transparent 20%);
+      background-size:
+        15% 15%,
+        20% 20%,
+        18% 18%,
+        20% 20%,
+        15% 15%,
+        20% 20%,
+        18% 18%;
+      background-position: 50% 0%;
+      animation: bottomBubbles 0.6s ease;
+    }
+  }
 }

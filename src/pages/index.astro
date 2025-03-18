@@ -3,5 +3,29 @@ import Navbar from "../components/Navbar.astro";
 import Layout from "../layouts/Layout.astro";
 ---
 <Layout title="Binary Brains">
-	<Navbar />
+  <Navbar />
+  <main class="flex flex-col gap-16 mb-4">
+    <section
+      id="inicio"
+      class="flex gap-4 justify-center px-8 pt-72 pb-24 md:px-36 md:pb-48 lg:p-48"
+    >
+      <div class="flex flex-col text-white w-full lg:w-[75%] gap-4">
+        <span class="text-2xl text-[#4cA4CA] pl-1">Hola, somos</span>
+        <h1 class="text-6xl text-[#4CA4CA] font-bold">Binary Brains</h1>
+        <p class="text-2xl text-[#B1D9EB] pl-1">
+          Club de Desarrollo de Software en UPIICSA: Aprendiendo y creciendo
+          juntos en tecnología.
+        </p>
+        <div class="pl-1">
+          <a
+            href="https://forms.gle/h81o2CYZyEGUznY59"
+            target="_blank"
+            class="sparkling-btn"
+          >
+            Registrate
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
 </Layout>
