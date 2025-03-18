@@ -1,7 +1,17 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'JetBrains Mono';
+  src: url('fonts/JetBrainsMono-Light.woff2') format('woff2'),
+  url('fonts/JetBrainsMono-Regular.woff2') format('woff2'),
+  url('fonts/JetBrainsMono-Thin.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+}
+
 body {
   @apply bg-[#060513] text-white;
+  font-family: 'JetBrains Mono', sans-serif;
 }
 
 .custom-cursor {
