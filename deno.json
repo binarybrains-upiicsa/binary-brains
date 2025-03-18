@@ -1,0 +1,18 @@
+{
+  "lint": {
+    "rules": {
+      "tags": ["recommended"],
+      "include": [
+        "no-console",
+        "eqeqeq"
+      ]
+    }
+  },
+  "unstable": [
+    "fmt-component"
+  ],
+  "exclude": [
+    "dist",
+    ".vscode"
+  ]
+}
