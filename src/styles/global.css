@@ -1,1 +1,16 @@
 @import "tailwindcss";
+
+body {
+  @apply bg-[#060513] text-white;
+}
+
+.custom-cursor {
+  @apply -z-10 w-[800px] h-[800px] rounded-[80%] fixed pointer-events-none
+    translate-[-50%] transition-transform duration-[50];
+  background: radial-gradient(
+    circle farthest-corner at center,
+    rgba(69, 148, 180, 0.14),
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0)
+  );
+}
