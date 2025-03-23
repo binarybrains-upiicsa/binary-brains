@@ -11,7 +11,7 @@ technologies:
 - "Python"
 - "Spring"
 - "TS"
-url: "https://github.com/xVrzBx/100Days100Proyects"
+link: "https://github.com/xVrzBx/100Days100Proyects"
 imagePath: "/images/repositories/100-dias.gif"
 ---
 

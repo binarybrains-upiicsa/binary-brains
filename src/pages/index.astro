@@ -5,8 +5,10 @@ import Navbar from "../components/Navbar.astro";
 import SectionContainer from "../components/SectionContainer.astro";
 import Layout from "../layouts/Layout.astro";
 import RepositoryCard from "../components/RepositoryCard.astro";
+import EventCard from "../components/EventCard.astro";
 
 const repositories = await getCollection("repositories");
+const events = await getCollection("events");
 ---
 <Layout title="Binary Brains">
   <Navbar />
@@ -39,7 +41,20 @@ const repositories = await getCollection("repositories");
       title="Eventos proximos"
       align="left"
     >
-      <h1>asd</h1>
+      <div>
+        {
+          events.map(({ data, body }) => (
+            <EventCard
+              title={data.title}
+              link={data.link}
+              address={data.address}
+              imagePath={data.imagePath}
+              eventDates={data.eventDates}
+              content={body}
+            />
+          ))
+        }
+      </div>
     </SectionContainer>
 
     <SectionContainer
@@ -57,7 +72,7 @@ const repositories = await getCollection("repositories");
               description={body ?? ""}
               technologies={data.technologies}
               imagePath={data.imagePath}
-              url={data.url}
+              link={data.link}
             />
           ))
             : null

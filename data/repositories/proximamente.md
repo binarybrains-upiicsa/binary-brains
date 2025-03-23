@@ -1,6 +1,6 @@
 ---
 title: "Proximamente..."
-url: "https://github.com/BinaryBrainsUPIICSA"
+link: "https://github.com/BinaryBrainsUPIICSA"
 imagePath: "/images/repositories/github.jpg"
 ---
 
