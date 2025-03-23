@@ -9,7 +9,8 @@
     }
   },
   "unstable": [
-    "fmt-component"
+    "fmt-component",
+    "sloppy-imports"
   ],
   "exclude": [
     "dist",
