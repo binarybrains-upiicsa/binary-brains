@@ -11,6 +11,11 @@ Página web para el club de desarrollo de software Binary Brains.
 
 ## Comandos
 
+**Instlación de dependencias**
+```bash
+deno install --allow-scripts
+```
+
 **Ejecutar el servidor de desarrollo**
 
 ```bash
