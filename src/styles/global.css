@@ -170,7 +170,7 @@ body {
 }
 
 .card {
-  @apply border-solid border-[0.1px];
+  @apply border-solid border-[0.1px] transition-colors ease-in duration-[0.2s];
   border-color: rgba(129, 129, 129, 0.19);
   &:hover {
     background: rgba(129, 129, 129, 0.14);

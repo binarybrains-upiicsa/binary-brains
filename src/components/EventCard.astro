@@ -1,14 +1,86 @@
 ---
+import IconMapPin from './icons/IconMapPin.astro';
+
 interface Props {
   title: string;
   link: string;
   address: string;
-  eventDates: ({
+  eventDates: {
     date: string;
     start: string;
     end: string;
-  })[];
+  };
   imagePath: string;
   content?: string;
 }
+
+const { title, link, address, eventDates, imagePath, content } = Astro.props;
+
+const month = Intl.DateTimeFormat("es", { month: "short" }).format(new Date(eventDates.date)).toUpperCase();
+const day = Intl.DateTimeFormat("es", { day: "2-digit" }).format(new Date(eventDates.date));
+
+const wholeDate = Intl.DateTimeFormat("es", { weekday: "long", day: "2-digit", month: "long" }).format(new Date(eventDates.date));
+
 ---
+<a
+  href={link}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="flex justify-center no-underline w-[90%] lg:w-1/2"
+>
+  <article class="rounded-lg card">
+    <img
+      class="w-full rounded-lg aspect-16/9 object-cover"
+      src={imagePath}
+      alt={title}
+    >
+    <div class="px-6 py-4">
+      <header class="flex justify-between mb-2 text-xl font-bold">
+        <h3 class="text-[#4CA4CA]">{title}</h3>
+      </header>
+      <div
+        class="grid grid-cols-[40px_1fr] lg:grid-cols-[40px_1fr_40px_1fr] gap-4 items-start"
+      >
+        <!-- Fecha -->
+        <div
+          class="flex flex-col justify-center items-center size-10 rounded-lg border-2 border-solid border-[#353C4B]"
+        >
+          <div
+            class="text-xs px-2 text-[#B1D9EB] bg-[#353C4B] flex-1 rounded-t-md"
+          >
+            {month}
+          </div>
+          <div
+            class="w-full px-2 text-xs flex justify-center text-[#B1D9EB] bg-[#1A2130] flex-1 rounded-b-md"
+          >
+            {day}
+          </div>
+        </div>
+        <div class="flex flex-col">
+          <time class="text-xs text-[#B1D9EB]" datetime={eventDates.date}
+          >{wholeDate}</time>
+          <span class="text-xs text-[#B1D9EB]">{eventDates.start} a {
+              eventDates.end
+            }</span>
+        </div>
+
+        <!-- Ubicacion -->
+        <div
+          class="flex flex-col justify-center items-center border-2 border-solid border-[rgba(255,255,255,0.16)] rounded-lg px-3 text-[#B1D9EB] size-10"
+        >
+          <IconMapPin class="size-5" />
+        </div>
+        <div class="flex flex-col">
+          <address class="text-xs text-[#B1D9EB] not-italic">
+            {address}
+          </address>
+        </div>
+      </div>
+      <div class="text-base my-4 text-[#B1D9EB]">
+        <p>
+          {content}
+        </p>
+      </div>
+    </div>
+  </article>
+</a>
