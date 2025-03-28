@@ -3,7 +3,7 @@ interface Props {
   title: string;
   link: string;
   description: string;
-  technologies: string[];
+  technologies?: string[];
   imagePath: string;
 }
 
@@ -11,7 +11,7 @@ const {
   title,
   link,
   description,
-  technologies,
+  technologies = [],
   imagePath,
 } = Astro.props;
 ---
