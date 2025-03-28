@@ -16,10 +16,11 @@ interface Props {
 
 const { title, link, address, eventDates, imagePath, content } = Astro.props;
 
-const month = Intl.DateTimeFormat("es", { month: "short" }).format(new Date(eventDates.date)).toUpperCase();
-const day = Intl.DateTimeFormat("es", { day: "2-digit" }).format(new Date(eventDates.date));
+const date = new Date(`${eventDates.date}T12:00:00-06:00`);
 
-const wholeDate = Intl.DateTimeFormat("es", { weekday: "long", day: "2-digit", month: "long" }).format(new Date(eventDates.date));
+const month = Intl.DateTimeFormat("es", { month: "short" }).format(date).toUpperCase();
+const day = Intl.DateTimeFormat("es", { day: "2-digit" }).format(date);
+const wholeDate = Intl.DateTimeFormat("es", { weekday: "long", day: "2-digit", month: "long" }).format(date);
 
 ---
 <a

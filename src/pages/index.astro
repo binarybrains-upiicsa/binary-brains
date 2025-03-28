@@ -8,11 +8,21 @@ import RepositoryCard from "../components/RepositoryCard.astro";
 import EventCard from "../components/EventCard.astro";
 
 const repositories = await getCollection("repositories");
-const events = (await getCollection("events"));
-// .filter(
-//   ({ data }) =>
-//     data.eventDates.some((date) => new Date(date.date) >= new Date(Date.now())
-//     ));
+const events = (await getCollection("events"))
+.filter(({data}) =>
+  data.eventDates.some((date) => {
+    const currentDate = new Date().toLocaleString('en-US', { timeZone: 'America/Mexico_City' }).split(',')[0];
+    return new Date(date.date) >= new Date(currentDate)
+  })
+).map((event) => {
+  const currentDate = new Date().toLocaleString('en-US', { timeZone: 'America/Mexico_City' }).split(',')[0];
+  return {
+    ...event,
+    eventDates: event.data.eventDates.find((date) => new Date(date.date) >= new Date(currentDate))!
+  };
+});
+
+console.log(events);
 ---
 <Layout title="Binary Brains">
   <Navbar />
@@ -52,14 +62,14 @@ const events = (await getCollection("events"));
             No hay eventos próximos. Vuelve pronto :3
           </p>
         ) : (
-          events.map(({ data, body }) => (
+          events.map((event) => (
             <EventCard
-              title={data.title}
-              link={data.link}
-              address={data.address}
-              eventDates={data.eventDates[0]}
-              imagePath={data.imagePath}
-              content={body}
+              title={event.data.title}
+              link={event.data.link}
+              address={event.data.address}
+              eventDates={event.eventDates}
+              imagePath={event.data.imagePath}
+              content={event.body}
             />
           ))
         )}
