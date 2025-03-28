@@ -17,6 +17,17 @@ const { title } = Astro.props;
     <title>{title}</title>
   </head>
   <body>
+    <div id="cursor" class="custom-cursor" />
     <slot />
   </body>
 </html>
+
+<script>
+  const cursor = document.getElementById("cursor");
+    globalThis.addEventListener("mousemove", (event: MouseEvent) => {
+      if (cursor) {
+        cursor.style.transform =
+          `translate(${event.clientX}px, ${event.clientY}px)`;
+      }
+    });
+</script>

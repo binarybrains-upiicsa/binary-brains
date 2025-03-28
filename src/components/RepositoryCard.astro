@@ -1,0 +1,50 @@
+---
+interface Props {
+  title: string;
+  link: string;
+  description: string;
+  technologies?: string[];
+  imagePath: string;
+}
+
+const {
+  title,
+  link,
+  description,
+  technologies = [],
+  imagePath,
+} = Astro.props;
+---
+
+<a
+  href={link}
+  class="w-[90%] md:max-w-sm overflow-hidden transition rounded shadow-lg card pb-4"
+>
+  <article>
+    <img
+      src={imagePath}
+      alt={title}
+      class="w-full opacity-90 aspect-16/9 object-cover"
+      loading="lazy"
+    />
+    <div class="px-6 py-4">
+      <h3 class="font-bold text-xl mb-2 text-[#4CA4CA]">{title}</h3>
+      <p class="text-base text-[#B1D9EB]">
+        {description}
+      </p>
+    </div>
+    {
+      technologies && (
+        <footer class="flex flex-wrap px-6">
+          {
+            technologies.map((technology) => (
+              <span class="chip">
+                <span class="text-[#4CA4CA]">{technology}</span>
+              </span>
+            ))
+          }
+        </footer>
+      )
+    }
+  </article>
+</a>
