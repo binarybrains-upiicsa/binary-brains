@@ -7,23 +7,25 @@ import Layout from "../layouts/Layout.astro";
 import RepositoryCard from "../components/RepositoryCard.astro";
 import EventCard from "../components/EventCard.astro";
 
+const CURRENT_DATE = new Date(
+  new Date()
+    .toLocaleString("en-US", { timeZone: "America/Mexico_City" })
+    .split(",")[0],
+);
+
 const repositories = await getCollection("repositories");
 const events = (await getCollection("events"))
-.filter(({data}) =>
-  data.eventDates.some((date) => {
-    const currentDate = new Date().toLocaleString('en-US', { timeZone: 'America/Mexico_City' }).split(',')[0];
-    return new Date(date.date) >= new Date(currentDate)
-  })
-).map((event) => {
-  const currentDate = new Date().toLocaleString('en-US', { timeZone: 'America/Mexico_City' }).split(',')[0];
-  return {
+  .filter(({ data }) =>
+    data.eventDates.some((date) => new Date(date.date) >= CURRENT_DATE),
+  )
+  .map((event) => ({
     ...event,
-    eventDates: event.data.eventDates.find((date) => new Date(date.date) >= new Date(currentDate))!
-  };
-});
-
-console.log(events);
+    eventDates: event.data.eventDates.find(
+      (date) => new Date(date.date) >= CURRENT_DATE,
+    )!,
+  }));
 ---
+
 <Layout title="Binary Brains">
   <Navbar />
   <main class="flex flex-col gap-16 mb-4">
@@ -56,23 +58,24 @@ console.log(events);
       align="left"
     >
       <div class="flex flex-col gap-4 items-center">
-
-        {events.length === 0 ? (
-          <p class="text-[#B1D9EB] text-2xl">
-            No hay eventos próximos. Vuelve pronto :3
-          </p>
-        ) : (
-          events.map((event) => (
-            <EventCard
-              title={event.data.title}
-              link={event.data.link}
-              address={event.data.address}
-              eventDates={event.eventDates}
-              imagePath={event.data.imagePath}
-              content={event.body}
-            />
-          ))
-        )}
+        {
+          events.length === 0 ? (
+            <p class="text-[#B1D9EB] text-2xl">
+              No hay eventos próximos. Vuelve pronto :3
+            </p>
+          ) : (
+            events.map((event) => (
+              <EventCard
+                title={event.data.title}
+                link={event.data.link}
+                address={event.data.address}
+                eventDates={event.eventDates}
+                imagePath={event.data.imagePath}
+                content={event.body}
+              />
+            ))
+          )
+        }
       </div>
     </SectionContainer>
 
@@ -86,14 +89,14 @@ console.log(events);
         {
           repositories.length > 0
             ? repositories.map(({ data, body }) => (
-            <RepositoryCard
-              title={data.title}
-              description={body ?? ""}
-              technologies={data.technologies}
-              imagePath={data.imagePath}
-              link={data.link}
-            />
-          ))
+                <RepositoryCard
+                  title={data.title}
+                  description={body ?? ""}
+                  technologies={data.technologies}
+                  imagePath={data.imagePath}
+                  link={data.link}
+                />
+              ))
             : null
         }
       </div>
