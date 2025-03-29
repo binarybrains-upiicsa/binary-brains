@@ -6,7 +6,6 @@ import SectionContainer from "../components/SectionContainer.astro";
 import Layout from "../layouts/Layout.astro";
 import RepositoryCard from "../components/RepositoryCard.astro";
 import EventCard from "../components/EventCard.astro";
-import { DEFAULT_REPOSITORY } from "../utils/constants";
 
 const CURRENT_DATE = new Date(
   new Date()
@@ -100,12 +99,6 @@ const events = (await getCollection("events"))
               ))
             : null
         }
-        <RepositoryCard
-          title={DEFAULT_REPOSITORY.title}
-          description={DEFAULT_REPOSITORY.description}
-          imagePath={DEFAULT_REPOSITORY.imagePath}
-          link={DEFAULT_REPOSITORY.link}
-        />
       </div>
     </SectionContainer>
   </main>
