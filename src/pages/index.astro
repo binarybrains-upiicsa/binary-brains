@@ -23,7 +23,12 @@ const events = (await getCollection("events"))
     eventDates: event.data.eventDates.find(
       (date) => new Date(date.date) >= CURRENT_DATE,
     )!,
-  }));
+  }))
+  .sort(
+    (a, b) =>
+      new Date(a.eventDates.date).getTime() -
+      new Date(b.eventDates.date).getTime(),
+  );
 ---
 
 <Layout title="Binary Brains">
